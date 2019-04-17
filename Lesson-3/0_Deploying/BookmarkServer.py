@@ -18,6 +18,7 @@
 #     long URI.
 
 import http.server
+import os
 import requests
 from urllib.parse import unquote, parse_qs
 
@@ -119,6 +120,6 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             self.wfile.write("Couldn't fetch URI '{}'.".format(longuri).encode())
 
 if __name__ == '__main__':
-    server_address = ('', 8000)
+    server_address = ('', int(os.environ.get('PORT', '8000')))
     httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
