@@ -114,9 +114,9 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             # Didn't successfully fetch the long URI.
             # Send a 404 error with a useful message.
             self.send_response(404)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header('Content-type', 'text/plain; charset=utf-8')
             self.end_headers()
-            self.wfile.write("URI doesn't exist.".encode())
+            self.wfile.write("Couldn't fetch URI '{}'.".format(longuri).encode())
 
 if __name__ == '__main__':
     server_address = ('', 8000)
